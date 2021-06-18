@@ -78,6 +78,9 @@ set /p fillBottom=How high is your T-spin off the ground? (Will default to 0).
 if [%fillBottom%] == [] set fillBottom=0
 set /p maxRoof=How high should we put pieces in order to find your T-Spin? (Defaults to being done automatically.) 
 if [%maxRoof%] == [] set maxRoof=-1
+set /p logPath=Where should the results of this be saved? (All outputs are saved in the output folder, default is therefore "spin.html") 
+if [%logPath%] == [] set logPath=spin.html
+set logPath=output/%logPath%
 set /p etc=Any other specifications you need? (Check https://knewjade.github.io/sfinder-docs/contents/spin/main.html for a full list!) 
 goto 'exportSpin'
 
@@ -87,12 +90,13 @@ set /p exportBatch=Do you want this to be saved to a batch file for later use? I
 if [%exportBatch%] == [] set exportBatch=placeholder 
 if %exportBatch%==placeholder goto 'finishSpin'
 if exist %exportBatch% echo This name is taken. Please try again. && goto 'exportSpin'
-if not [%exportBatch%] == [] echo %start% %mode% %fumen% -P %page% -p "%patterns%" -c %line% -fb %fillBottom% -mr %maxRoof% %etc% >> %exportBatch%
+if not [%exportBatch%] == [] echo %start% %mode% %fumen% -P %page% -p "%patterns%" -c %line% -fb %fillBottom% -ft %maxRoof% -o %logPath% %etc% >> %exportBatch%
+if not [%exportBatch%] == [] echo pause >> %exportBatch%
 goto 'finishSpin'
 
 : 'finishSpin'
-echo %start% %mode% %fumen% -P %page% -p "%patterns%" -c %line% -fb %fillBottom% -mr %maxRoof% %etc%
-%start% %mode% %fumen% -P %page% -p "%patterns%" -c %line% -fb %fillBottom% -mr %maxRoof% %etc%
+echo %start% %mode% %fumen% -P %page% -p "%patterns%" -c %line% -fb %fillBottom% -ft %maxRoof% -o %logPath% %etc%
+%start% %mode% %fumen% -P %page% -p "%patterns%" -c %line% -fb %fillBottom% -ft %maxRoof% -o %logPath% %etc%
 pause
 echo The command should've run successfully. Thanks for your assistance!
 pause
@@ -123,6 +127,7 @@ if [%exportBatch%] == [] set exportBatch=placeholder
 if %exportBatch%==placeholder goto 'finishPercent'
 if exist %exportBatch% echo A file with this name already exists. Please choose a different name. && goto 'exportPercent'
 if not [%exportBatch%] == [] echo %start% %mode% %fumen% -P %page% -p "%patterns%" -H %hold% -c %clearLine% -d %drop% -lp %logPath% %etc% >> %exportBatch%
+if not [%exportBatch%] == [] echo pause >> %exportBatch%
 goto 'finishPercent'
 
 : 'finishPercent'
@@ -157,6 +162,7 @@ if [%exportBatch%] == [] set exportBatch=placeholder
 if %exportBatch%==placeholder goto 'finishPath'
 if exist %exportBatch% echo A file with this name already exists. Please choose a different name. && goto 'exportPath'
 if not [%exportBatch%] == [] echo %start% %mode% %fumen% -P %page% -p "%patterns%" -H %hold% -c %clearLine% -d %drop% -o %logPath% %etc% >> %exportBatch%
+if not [%exportBatch%] == [] echo pause >> %exportBatch%
 goto 'finishPath'
 
 : 'finishPath'
@@ -203,6 +209,7 @@ if [%exportBatch%] == [] set exportBatch=placeholder
 if %exportBatch%==placeholder goto 'finishSetup'
 if exist %exportBatch% echo A file with this name already exists. Please choose a different name. && goto 'exportSetup'
 if not [%exportBatch%] == [] echo %start% %mode% %fumen% -P %page% -p "%patterns%" -H %hold% -f %fill% -m %margin% -F %free% -e %holes% -d %drop% -np %pieceNum% -o %logPath% %etc% >> %exportBatch%
+if not [%exportBatch%] == [] echo pause >> %exportBatch%
 goto 'finishSetup'
 
 : 'finishSetup'
