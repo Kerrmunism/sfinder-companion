@@ -70,7 +70,7 @@ pause
 exit
 
 : 'spin'
-set /p patterns=What bag do you want? (Will default to *p7, check https://knewjade.github.io/sfinder-docs/contents/patterns.html if confused on how to allocate bags). 
+set /p patterns=What bag do you want? (Will default to *p7, check https://knewjade.github.io/sfinder-docs/contents/patterns.html if confused on how to allocate bags).
 if [%patterns%] == [] set patterns=*p7
 set /p line=How many lines should your T-spin clear? (Will default to 2). 
 if [%line%] == [] set line=2
@@ -104,7 +104,7 @@ exit
 
 
 : 'percent'
-set /p patterns=What bag do you want? (Will default to *p7, check https://knewjade.github.io/sfinder-docs/contents/patterns.html if confused on how to allocate bags). 
+set /p patterns=What bag do you want? [Answer as whatever bag you want inside of quotes, for example, "L, *p6"] (Will default to *p7, check https://knewjade.github.io/sfinder-docs/contents/patterns.html if confused on how to allocate bags). 
 if [%patterns%] == [] set patterns=*p7
 set /p hold=Should hold be used? [Answer "yes" or "no"] (Will default to yes). 
 if [%hold%] == [] set hold=use
@@ -126,20 +126,20 @@ set /p exportBatch=Do you want this to be saved to a batch file for later use? I
 if [%exportBatch%] == [] set exportBatch=placeholder 
 if %exportBatch%==placeholder goto 'finishPercent'
 if exist %exportBatch% echo A file with this name already exists. Please choose a different name. && goto 'exportPercent'
-if not [%exportBatch%] == [] echo %start% %mode% %fumen% -P %page% -p "%patterns%" -H %hold% -c %clearLine% -d %drop% -lp %logPath% %etc% >> %exportBatch%
+if not [%exportBatch%] == [] echo %start% %mode% %fumen% -P %page% -p %patterns% -H %hold% -c %clearLine% -d %drop% -lp %logPath% %etc% >> %exportBatch%
 if not [%exportBatch%] == [] echo pause >> %exportBatch%
 goto 'finishPercent'
 
 : 'finishPercent'
-echo %start% %mode% %fumen% -P %page% -p "%patterns%" -H %hold% -c %clearLine% -d %drop% -lp %logPath% %etc%
-%start% %mode% %fumen% -P %page% -p "%patterns%" -H %hold% -c %clearLine% -d %drop% -lp %logPath% %etc%
+echo %start% %mode% %fumen% -P %page% -p %patterns% -H %hold% -c %clearLine% -d %drop% -lp %logPath% %etc%
+%start% %mode% %fumen% -P %page% -p %patterns% -H %hold% -c %clearLine% -d %drop% -lp %logPath% %etc%
 pause
 echo The command should've run successfully. Thanks for your assistance!
 pause
 exit
 
 : 'path'
-set /p patterns=What bag do you want? (Will default to *p7, check https://knewjade.github.io/sfinder-docs/contents/patterns.html if confused on how to allocate bags).  
+set /p patterns=What bag do you want? [Answer as whatever bag you want inside of quotes, for example, "L, *p6"] (Will default to *p7, check https://knewjade.github.io/sfinder-docs/contents/patterns.html if confused on how to allocate bags). 
 if [%patterns%] == [] set patterns=*p7
 set /p hold=Should hold be used? [Answer "yes" or "no"] (Will default to yes). 
 if [%hold%] == [] set hold=use
@@ -161,20 +161,20 @@ set /p exportBatch=Do you want this to be saved to a batch file for later use? I
 if [%exportBatch%] == [] set exportBatch=placeholder 
 if %exportBatch%==placeholder goto 'finishPath'
 if exist %exportBatch% echo A file with this name already exists. Please choose a different name. && goto 'exportPath'
-if not [%exportBatch%] == [] echo %start% %mode% %fumen% -P %page% -p "%patterns%" -H %hold% -c %clearLine% -d %drop% -o %logPath% %etc% >> %exportBatch%
+if not [%exportBatch%] == [] echo %start% %mode% %fumen% -P %page% -p %patterns% -H %hold% -c %clearLine% -d %drop% -o %logPath% %etc% >> %exportBatch%
 if not [%exportBatch%] == [] echo pause >> %exportBatch%
 goto 'finishPath'
 
 : 'finishPath'
-echo %start% %mode% %fumen% -P %page% -p "%patterns%" -H %hold% -c %clearLine% -d %drop% -o %logPath% %etc%
-%start% %mode% %fumen% -P %page% -p "%patterns%" -H %hold% -c %clearLine% -d %drop% -o %logPath% %etc%
+echo %start% %mode% %fumen% -P %page% -p %patterns% -H %hold% -c %clearLine% -d %drop% -o %logPath% %etc%
+%start% %mode% %fumen% -P %page% -p %patterns% -H %hold% -c %clearLine% -d %drop% -o %logPath% %etc%
 pause
 echo The command should've run successfully. Thanks for your assistance!
 pause
 exit
 
 : 'setup'
-set /p patterns=What bag do you want? (Will default to *p7, check https://knewjade.github.io/sfinder-docs/contents/patterns.html if confused on how to allocate bags).  
+set /p patterns=What bag do you want? [Answer as whatever bag you want inside of quotes, for example, "L, *p6"] (Will default to *p7, check https://knewjade.github.io/sfinder-docs/contents/patterns.html if confused on how to allocate bags).  
 if [%patterns%] == [] set patterns=*p7
 set /p holes=Should we allow setups with holes in the margin space (if it exists) to be counted? [Answer "none" for all holes to be excluded, even if there is a gap where a piece could be inserted, answer "some" for all holes to be excluded, except ones with gaps where pieces could be inserted, or "all" for all holes to be allowed.] (Will default to all) 
 if [%holes%] == [] set holes=n0ne
@@ -208,13 +208,13 @@ set /p exportBatch=Do you want this to be saved to a batch file for later use? I
 if [%exportBatch%] == [] set exportBatch=placeholder 
 if %exportBatch%==placeholder goto 'finishSetup'
 if exist %exportBatch% echo A file with this name already exists. Please choose a different name. && goto 'exportSetup'
-if not [%exportBatch%] == [] echo %start% %mode% %fumen% -P %page% -p "%patterns%" -H %hold% -f %fill% -m %margin% -F %free% -e %holes% -d %drop% -np %pieceNum% -o %logPath% %etc% >> %exportBatch%
+if not [%exportBatch%] == [] echo %start% %mode% %fumen% -P %page% -p %patterns% -H %hold% -f %fill% -m %margin% -F %free% -e %holes% -d %drop% -np %pieceNum% -o %logPath% %etc% >> %exportBatch%
 if not [%exportBatch%] == [] echo pause >> %exportBatch%
 goto 'finishSetup'
 
 : 'finishSetup'
-echo %start% %mode% %fumen% -P %page% -p "%patterns%" -H %hold% -f %fill% -m %margin% -F %free% -e %holes% -d %drop% -np %pieceNum% -o %logPath% %etc%
-%start% %mode% %fumen% -P %page% -p "%patterns%" -H %hold% -f %fill% -m %margin% -F %free% -e %holes% -d %drop% -np %pieceNum% -o %logPath% %etc%
+echo %start% %mode% %fumen% -P %page% -p %patterns% -H %hold% -f %fill% -m %margin% -F %free% -e %holes% -d %drop% -np %pieceNum% -o %logPath% %etc%
+%start% %mode% %fumen% -P %page% -p %patterns% -H %hold% -f %fill% -m %margin% -F %free% -e %holes% -d %drop% -np %pieceNum% -o %logPath% %etc%
 pause
 echo The command should've run successfully. Thanks for your assistance!
 pause
