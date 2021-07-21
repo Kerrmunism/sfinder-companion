@@ -32,6 +32,7 @@
 ::
 ::978f952a14a936cc963da21a135fa983
 @echo off
+title sfindercompanion
 setlocal enableextensions
 
 : 'start'
@@ -70,7 +71,7 @@ pause
 exit
 
 : 'spin'
-set /p patterns=What bag do you want? (Will default to *p7, check https://knewjade.github.io/sfinder-docs/contents/patterns.html if confused on how to allocate bags).
+set /p patterns=What bag do you want? [Answer as whatever bag you want inside of quotes, for example, "L, *p6"] (Will default to *p7, check https://knewjade.github.io/sfinder-docs/contents/patterns.html if confused on how to allocate bags).
 if [%patterns%] == [] set patterns=*p7
 set /p line=How many lines should your T-spin clear? (Will default to 2). 
 if [%line%] == [] set line=2
@@ -90,13 +91,13 @@ set /p exportBatch=Do you want this to be saved to a batch file for later use? I
 if [%exportBatch%] == [] set exportBatch=placeholder 
 if %exportBatch%==placeholder goto 'finishSpin'
 if exist %exportBatch% echo This name is taken. Please try again. && goto 'exportSpin'
-if not [%exportBatch%] == [] echo %start% %mode% %fumen% -P %page% -p "%patterns%" -c %line% -fb %fillBottom% -ft %maxRoof% -o %logPath% %etc% >> %exportBatch%
+if not [%exportBatch%] == [] echo %start% %mode% %fumen% -P %page% -p %patterns% -c %line% -fb %fillBottom% -ft %maxRoof% -o %logPath% %etc% >> %exportBatch%
 if not [%exportBatch%] == [] echo pause >> %exportBatch%
 goto 'finishSpin'
 
 : 'finishSpin'
-echo %start% %mode% %fumen% -P %page% -p "%patterns%" -c %line% -fb %fillBottom% -ft %maxRoof% -o %logPath% %etc%
-%start% %mode% %fumen% -P %page% -p "%patterns%" -c %line% -fb %fillBottom% -ft %maxRoof% -o %logPath% %etc%
+echo %start% %mode% %fumen% -P %page% -p %patterns% -c %line% -fb %fillBottom% -ft %maxRoof% -o %logPath% %etc%
+%start% %mode% %fumen% -P %page% -p %patterns% -c %line% -fb %fillBottom% -ft %maxRoof% -o %logPath% %etc%
 pause
 echo The command should've run successfully. Thanks for your assistance!
 pause
